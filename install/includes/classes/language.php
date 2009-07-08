@@ -29,11 +29,13 @@
       foreach ($osC_DirectoryListing->getFiles() as $file) {
         $osC_XML = new osC_XML(file_get_contents('../includes/languages/' . $file['name']));
         $lang = $osC_XML->toArray();
-
+// JOC - added parent_id so admin language class does not fail test >0
         $this->_languages[$lang['language']['data']['code']] = array('name' => $lang['language']['data']['title'],
                                                                      'code' => $lang['language']['data']['code'],
-                                                                     'charset' => $lang['language']['data']['character_set']);
+                                                                     'charset' => $lang['language']['data']['character_set'],
+                                                                     'parent_id' => $lang['language']['data']['parent_language_code']);
       }
+
 
       unset($lang);
 
